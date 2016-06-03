@@ -12,58 +12,79 @@
                 margin-top:1%;
                 margin-bottom:1%;
             }
+            #the_end img:hover{
+                -moz-filter: grayscale(0%) !important; 
+                -ms-filter: grayscale(0%) !important;
+                -o-filter: grayscale(0%) !important;
+                -webkit-filter: grayscale(0%) !important;
+                cursor:pointer;
+            }
         </style>
-        <script src="https://ajax.googleapis.com/ajax/libs.jquery/1.10.1/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
         <script>
+            var api_body_background_image = "download.jpg";
+            var api_top_click = "http://www.xfficient.com/intoMe/top_click_count.php";
+            var api_main = "http://www.xfficient.com/intoMe/main_video.php"
+            var api_facebook_icon = "facebook_icon.png";
+            var api_youtube_icon = "youtube_icon.png";
+            var api_twitter_icon = "twitter_icon.png";
+            var api_weibo_icon = "weibo_icon.png";
             var api_new_video_background_image = "";
-            var api_top_click_count = "";
-            var top_click_count ;
+            var top_click_count = 10 ; 
             var temp;
             var temp2;
             var temp3;
         </script>
         <script>
-            function ajax_call(api,api_method,api_data){
+            function ajax_call(api,api_method,api_data,api_async){
+                var return_me;
                 $.ajax({
                     url: api,
                     method: api_method,
                     data : api_data,
+                    async: api_async,
                     success: function(result){
-                        return result;
+                        return_me = result;
                     }
                 })
+                return return_me;
             }
         </script>
     </head>
-    <body>
-        <div style="margin-top:1%;margin-bottom:1%;margin-right:0;margin-left:0;position:fixed;top:0;left:0;bottom:0;width:15%;height:auto;border-right-style:groove">
+    <body style="background-repeat:no-repeat;background-size: cover;">
+        <div style="margin-top:1%;margin-bottom:0%;margin-right:0;margin-left:0;position:fixed;top:0;left:0;bottom:0;width:15%;height:auto;border-right-style:groove">
             <div style="margin-top:0%;margin-bottom:0%;margin-right:5%;margin-left:5%;position:relative;left:0;top:0;width:90%;height:5%;border-bottom-style:groove">
                 <h1 align="center" style="width:100%;margin:auto;position:absolute;bottom:0;text-decoration:underline;font-family:'Brush Script MT',cursive;font-color:red">intoMe</h1>
             </div>
             <div id="top_click_div" style="margin-top:0%;margin-bottom:0%;margin-right:5%;margin-left:5%;position:relative;left:0;top:0;bottom:0;width:90%">
                 <script>
-                    top_click_count = 2
+                    var list = ajax_call(api_top_click,"GET","",false);
+                    list = JSON.parse(list);
                     for ( i = 0; i < top_click_count; i++){
                         temp = document.createElement('video');
                         temp.className = "top_click";
+                        temp.setAttribute("src",list[i])
                         document.getElementById("top_click_div").appendChild(temp);
                     }
                 </script>
             </div>
         </div>
-        <div style="display:inline-block;margin-top:1%;margin-bottom:1%;margin-right:0;margin-left:0;position:fixed;top:0;left:17%;bottom:0;right:0">
-            <div id="new_video" style="display:inline-block;margin-top:1%;margin-bottom:1%;margin-right:1%;margin-left:1%;position:relative;bottom:-100px">
+        <div id="main" style="display:inline-block;margin-top:1%;margin-bottom:0%;margin-right:0;margin-left:0;position:fixed;top:0;left:17%;bottom:0;right:0">
+            <div id="new_video" style="display:inline-block;margin-top:1%;margin-bottom:1%;margin-right:1%;margin-left:1%;position:relative;bottom:0px">
                 <script>
+                    var list = ajax_call(api_main,"GET","",false);
+                    list = JSON.parse(list);
                     for ( i = 0; i < 20; i++){
                         temp3 = document.createElement("div")
                         temp2 = document.createElement("p");
                         temp = document.createElement('video');
                         
                         temp.className = "new_video";
-                        temp.setAttribute("align","center");
+                        temp.setAttribute("src",list[i]);
+                        temp.setAttribute("controls","true");
                         
                         temp2.setAttribute("align","center");
-                        temp2.appendChild(document.createTextNode("author:linchuyuan <br> date:11111"));
+                        temp2.innerHTML = "Author:linchuyuan <br> Date:11111 <br> Hot: 1234"
                         
                         temp3.style.float="left";
                         temp3.appendChild(temp);
@@ -73,9 +94,23 @@
                 </script>
             </div>
         </div>
+        <div id="the_end" style="display:inline-block;position:fixed;bottom:0;right:0;height:5%">
+            <div id="the_end_content" style="display:inline-block;float:right;text-align:right;">
+                <p style="display:inline-block;text-align:right;margin:0;position:relative;color:DimGray;white-space:pre">&copy 2016 Xfficient. All rights reversed. |		<img class="quick_link" id="facebook_link" style="position:absolute;bottom:0%;width:1em;height:1em;">		<img class="quick_link" id="twitter_link" style="position:absolute;bottom:0%;width:1em;height:1em">		<img class="quick_link" id="youtube_link" style="position:absolute;bottom:0%;width:1em;height:1em">		<img class="quick_link" id="weibo_link" style="position:absolute;bottom:0%;width:1em;height:1em;"></p>
+            </div>
+        </div>
         <script>
-            document.getElementById("shortcut_icon").href = "xfficient.png";
-            document.getElementById("new_video").style.backgroundImage = api_new_video_background_image;
-        </script>
+            document.body.style.backgroundImage = "url('"+api_body_background_image+"')";
+            document.getElementById("shortcut_icon").href = "download.jpg";
+            document.getElementById("main").style.backgroundImage = "url('"+api_new_video_background_image+"')";
+            document.getElementById("facebook_link").setAttribute("src",api_facebook_icon);
+            document.getElementById("twitter_link").setAttribute("src",api_twitter_icon);
+            document.getElementById("youtube_link").setAttribute("src",api_youtube_icon);
+            document.getElementById("weibo_link").setAttribute("src",api_weibo_icon);
+            $("#login_link").click(function(){ window.location.replace("http://www.danicaxu.com/login")});
+            $("#facebook_link").click(function(){ window.location.replace("http://www.google.com")});
+            $("#twitter_link").click(function(){ window.location.replace("http://www.baidu.com")});
+            $("#linkedin_link").click(function(){ window.location.replace("http://www.bing.com")});
+        </script>        
     </body>
 </html>
