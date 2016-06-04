@@ -6,11 +6,47 @@
         <meta name="keywords" content="intoMe">
         <meta name="author" content="Danica">
         <link rel="shortcut icon" id="shortcut_icon" type="image/x-icon" />
+        <script>
+            var api_body_background_image = "download.jpg";
+            var api_top_video_background_image = "twitter_icon.png";
+            var api_top_click = "http://www.xfficient.com/intoMe/top_click_count.php";
+            var api_main = "http://www.xfficient.com/intoMe/main_video.php";
+            var api_contribute_form = "http://this.com";
+            var api_search_form_txt = "http://taht.com";
+            var api_facebook_icon = "facebook_icon.png";
+            var api_youtube_icon = "youtube_icon.png";
+            var api_twitter_icon = "twitter_icon.png";
+            var api_weibo_icon = "weibo_icon.png";
+            var name_contribute_form_file = "fileToUpload";
+            var name_search_txt = "keyword";
+            var top_click_count = 10 ; 
+            var temp;
+            var temp2;
+            var temp3;
+        </script>
         <style>
             .top_click{
                 width:100%;
                 margin-top:1%;
                 margin-bottom:1%;
+            }
+            .hover_to_pointer {
+                -webkit-border-radius: 10;
+                -moz-border-radius: 10;
+                font-family: Arial;
+                color: #ffffff;
+                background: #3498db;
+                text-decoration: none;
+            }
+            .hover_to_pointer:hover {
+                background: #3cb0fd;
+                background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+                text-decoration: none;
+                box-shadow:2px 2px 1px #888888;
+                cursor:pointer;
             }
             #the_end img:hover{
                 -moz-filter: grayscale(0%) !important; 
@@ -19,22 +55,39 @@
                 -webkit-filter: grayscale(0%) !important;
                 cursor:pointer;
             }
+            .nav {
+                position: fixed;
+                z-index: 9;
+                background:radial-gradient(#6666ff,black);
+                top: 0%;
+                width: 100%;
+                height: 7%;
+                left: 0%;
+                opacity: 0.7;
+            }
+            nav ul {
+                text-align: justify;
+                line-height: 0;
+                margin: 0;
+                padding: 0;
+            }
+            nav ul:after {
+                content: '';
+                display: inline-block;
+                width: 100%;
+            }
+            nav ul li {
+                display: inline-block;
+                line-height: 100%;
+            }
+            .item {
+                position:relative;
+                text-decoration:None;
+                color:black;
+                font-family:Arial, Helvetica, sans-serif;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-        <script>
-            var api_body_background_image = "download.jpg";
-            var api_top_click = "http://www.xfficient.com/intoMe/top_click_count.php";
-            var api_main = "http://www.xfficient.com/intoMe/main_video.php"
-            var api_facebook_icon = "facebook_icon.png";
-            var api_youtube_icon = "youtube_icon.png";
-            var api_twitter_icon = "twitter_icon.png";
-            var api_weibo_icon = "weibo_icon.png";
-            var api_new_video_background_image = "";
-            var top_click_count = 10 ; 
-            var temp;
-            var temp2;
-            var temp3;
-        </script>
         <script>
             function ajax_call(api,api_method,api_data,api_async){
                 var return_me;
@@ -52,9 +105,37 @@
         </script>
     </head>
     <body style="background-repeat:no-repeat;background-size: cover;">
-        <div style="margin-top:1%;margin-bottom:0%;margin-right:0;margin-left:0;position:fixed;top:0;left:0;bottom:0;width:15%;height:auto;border-right-style:groove">
-            <div style="margin-top:0%;margin-bottom:0%;margin-right:5%;margin-left:5%;position:relative;left:0;top:0;width:90%;height:5%;border-bottom-style:groove">
-                <h1 align="center" style="width:100%;margin:auto;position:absolute;bottom:0;text-decoration:underline;font-family:'Brush Script MT',cursive;font-color:red">intoMe</h1>
+        <div class='nav'>
+            <nav style="position:absolute;vertical-align: middle; left:0; bottom:0; top:40%; right:0; margin-left:25%;margin-right:25%">
+                <ul style="text-align: center">
+                    <li><a href="#" class="item" id="contribute_video_button"><button class="hover_to_pointer" style="font-size: 100%">Contribute Video!</button></a></li>
+                    <li>
+                        <form id="contribute_form" method="post" enctype="multipart/form-data" style="display:none">
+                            I will be a Rich Man! And, I love my wife
+                            <input type="file" id="contribute_for`m_file">
+                            <input type="submit" value="Upload" name="submit">
+                            <script>
+                                document.getElementById("contribute_form").setAttribute("action",api_contribute_form);
+                                document.getElementById("contribute_form_file").setAttribute("name",name_contribute_form_file);
+                            </script>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+            <div style="position:absolute;right:0;top:40%">
+                <form id="search_form" method="post">
+                    <input type="text" id="search_form_txt" placeholder="Search">
+                    <input type="submit" value="Search" name="submit">
+                    <script>
+                        document.getElementById("contribute_form").setAttribute("action",api_search_form_txt);
+                        document.getElementById("contribute_form_file").setAttribute("name",name_search_txt);
+                    </script>
+                </form>
+            </div>
+        </div>
+        <div id = "intome_top_click" style="box-shadow: 10px 10px 20px #888888;z-index:10;margin-top:1%;margin-bottom:1%;margin-right:1%;margin-left:1%;position:fixed;top:0;left:0;bottom:0;width:15%;height:auto;border-right-style:groove;background-repeat:no-repeat;background-size: cover;">
+            <div style="margin-top:0%;background:radial-gradient(blue,purple);opacity:0.7;margin-bottom:0%;margin-right:0%;margin-left:0%;position:relative;left:0;top:0;width:100%;height:5%;border-bottom-style:groove">
+                <h1 align="center" style="width:100%;margin:auto;position:absolute;bottom:0;text-decoration:underline;font-family:'Brush Script MT',cursive;color:red">intoMe</h1>
             </div>
             <div id="top_click_div" style="margin-top:0%;margin-bottom:0%;margin-right:5%;margin-left:5%;position:relative;left:0;top:0;bottom:0;width:90%">
                 <script>
@@ -69,7 +150,8 @@
                 </script>
             </div>
         </div>
-        <div id="main" style="display:inline-block;margin-top:1%;margin-bottom:0%;margin-right:0;margin-left:0;position:fixed;top:0;left:17%;bottom:0;right:0">
+        <div id="main" style="display:inline-block;margin-top:0%;margin-bottom:0%;margin-right:0;margin-left:0;position:fixed;top:0;left:15%;bottom:0;right:0">
+
             <div id="new_video" style="display:inline-block;margin-top:1%;margin-bottom:1%;margin-right:1%;margin-left:1%;position:relative;bottom:0px">
                 <script>
                     var list = ajax_call(api_main,"GET","",false);
@@ -100,13 +182,15 @@
             </div>
         </div>
         <script>
+            var contribute_video_show_index = 0;
             document.body.style.backgroundImage = "url('"+api_body_background_image+"')";
+            document.getElementById("intome_top_click").style.backgroundImage = "url('"+api_top_video_background_image+"')";
             document.getElementById("shortcut_icon").href = "download.jpg";
-            document.getElementById("main").style.backgroundImage = "url('"+api_new_video_background_image+"')";
             document.getElementById("facebook_link").setAttribute("src",api_facebook_icon);
             document.getElementById("twitter_link").setAttribute("src",api_twitter_icon);
             document.getElementById("youtube_link").setAttribute("src",api_youtube_icon);
             document.getElementById("weibo_link").setAttribute("src",api_weibo_icon);
+            $("#contribute_video_button").click(function(){if(contribute_video_show_index == 0 ){contribute_video_show_index=1; $("#contribute_form").show(100);}else {contribute_video_show_index=0;$("#contribute_form").hide();}});
             $("#login_link").click(function(){ window.location.replace("http://www.danicaxu.com/login")});
             $("#facebook_link").click(function(){ window.location.replace("http://www.google.com")});
             $("#twitter_link").click(function(){ window.location.replace("http://www.baidu.com")});
