@@ -7,7 +7,7 @@
         <meta name="author" content="Danica">
         <link rel="shortcut icon" id="shortcut_icon" type="image/x-icon" />
         <script>
-            var api_body_background_image = "download.jpg";
+            var api_body_background_image = "";
             var api_top_video_background_image = "twitter_icon.png";
             var api_top_click = "http://www.xfficient.com/intoMe/top_click_count.php";
             var api_main = "http://www.xfficient.com/intoMe/main_video.php";
@@ -31,22 +31,20 @@
                 margin-bottom:1%;
             }
             .hover_to_pointer {
-                -webkit-border-radius: 10;
-                -moz-border-radius: 10;
-                font-family: Arial;
-                color: #ffffff;
-                background: #3498db;
-                text-decoration: none;
+                background-color: #4CAF50;
+    		border: none;
+    		color: white;
+    		padding: 15px 32px;
+    		text-align: center;
+    		text-decoration: none;
+    		display: inline-block;
+    		font-size: 16px;
+    		margin: 4px 2px;
+    		cursor: pointer;
+		box-shadow:5px 5px 5px #888888;
             }
-            .hover_to_pointer:hover {
-                background: #3cb0fd;
-                background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-                background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-                background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-                background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-                text-decoration: none;
-                box-shadow:2px 2px 1px #888888;
-                cursor:pointer;
+            .hover_to_pointer:focus {
+		outline:0;
             }
             #the_end img:hover{
                 -moz-filter: grayscale(0%) !important; 
@@ -106,13 +104,13 @@
     </head>
     <body style="background-repeat:no-repeat;background-size: cover;">
         <div class='nav'>
-            <nav style="position:absolute;vertical-align: middle; left:0; bottom:0; top:40%; right:0; margin-left:25%;margin-right:25%">
+            <nav style="position:absolute;vertical-align: middle; left:0; bottom:0; top:30%; right:0; margin-left:25%;margin-right:25%">
                 <ul style="text-align: center">
                     <li><a href="#" class="item" id="contribute_video_button"><button class="hover_to_pointer" style="font-size: 100%">Contribute Video!</button></a></li>
-                    <li>
-                        <form id="contribute_form" method="post" enctype="multipart/form-data" style="display:none">
-                            I will be a Rich Man! And, I love my wife
-                            <input type="file" id="contribute_for`m_file">
+                    <li id="contribute_form_li" style="background:#4caf50;padding:1% 2%;display:none;box-shadow:4px 4px 4px #888888">
+                        <form id="contribute_form"method="post" enctype="multipart/form-data">
+                            I love my wife
+                            <input type="file" id="contribute_form_file">
                             <input type="submit" value="Upload" name="submit">
                             <script>
                                 document.getElementById("contribute_form").setAttribute("action",api_contribute_form);
@@ -122,13 +120,13 @@
                     </li>
                 </ul>
             </nav>
-            <div style="position:absolute;right:0;top:40%">
+            <div style="position:absolute;right:0;top:30%">
                 <form id="search_form" method="post">
                     <input type="text" id="search_form_txt" placeholder="Search">
                     <input type="submit" value="Search" name="submit">
                     <script>
-                        document.getElementById("contribute_form").setAttribute("action",api_search_form_txt);
-                        document.getElementById("contribute_form_file").setAttribute("name",name_search_txt);
+                        document.getElementById("search_form").setAttribute("action",api_search_form_txt);
+                        document.getElementById("search_form_txt").setAttribute("name",name_search_txt);
                     </script>
                 </form>
             </div>
@@ -190,7 +188,7 @@
             document.getElementById("twitter_link").setAttribute("src",api_twitter_icon);
             document.getElementById("youtube_link").setAttribute("src",api_youtube_icon);
             document.getElementById("weibo_link").setAttribute("src",api_weibo_icon);
-            $("#contribute_video_button").click(function(){if(contribute_video_show_index == 0 ){contribute_video_show_index=1; $("#contribute_form").show(100);}else {contribute_video_show_index=0;$("#contribute_form").hide();}});
+            $("#contribute_video_button").click(function(){if(contribute_video_show_index == 0 ){contribute_video_show_index=1; $("#contribute_form_li").show(100);}else {contribute_video_show_index=0;$("#contribute_form_li").hide();}});
             $("#login_link").click(function(){ window.location.replace("http://www.danicaxu.com/login")});
             $("#facebook_link").click(function(){ window.location.replace("http://www.google.com")});
             $("#twitter_link").click(function(){ window.location.replace("http://www.baidu.com")});
