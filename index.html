@@ -8,18 +8,17 @@
         <link rel="shortcut icon" id="shortcut_icon" type="image/x-icon" />
         <script>
             var api_body_background_image = "";
-            var api_top_video_background_image = "twitter_icon.png";
-            var api_top_click = "http://www.xfficient.com/intoMe/top_click_count.php";
-            var api_main = "http://www.xfficient.com/intoMe/main_video.php";
-            var api_contribute_form = "http://this.com";
-            var api_search_form_txt = "http://taht.com";
-            var api_facebook_icon = "facebook_icon.png";
-            var api_youtube_icon = "youtube_icon.png";
-            var api_twitter_icon = "twitter_icon.png";
-            var api_weibo_icon = "weibo_icon.png";
+            var api_top_video_background_image = "";
+            var api_top_click = "http://www.xfficient.com/intoMe/php/top_click.php";
+            var api_main = "http://www.xfficient.com/intoMe/php/main_video.php";
+            var api_contribute_form = "/intoMe/php/upload.php";
+            var api_search_form_txt = "/intoMe/php/search.php";
+            var api_facebook_icon = "image/facebook_icon.png";
+            var api_youtube_icon = "image/youtube_icon.png";
+            var api_twitter_icon = "image/twitter_icon.png";
+            var api_weibo_icon = "image/weibo_icon.png";
             var name_contribute_form_file = "fileToUpload";
-            var name_search_txt = "keyword";
-            var top_click_count = 10 ; 
+            var name_search_txt = "keyword"; 
             var temp;
             var temp2;
             var temp3;
@@ -41,10 +40,14 @@
     		font-size: 16px;
     		margin: 4px 2px;
     		cursor: pointer;
-		box-shadow:5px 5px 5px #888888;
+		box-shadow: 2px 2px 2px #888888;
             }
             .hover_to_pointer:focus {
 		outline:0;
+            }
+	    .hover_to_pointer:hover {
+                background-color: white;
+		color: #4CAF50;
             }
             #the_end img:hover{
                 -moz-filter: grayscale(0%) !important; 
@@ -56,7 +59,7 @@
             .nav {
                 position: fixed;
                 z-index: 9;
-                background:radial-gradient(#6666ff,black);
+                background:radial-gradient(black,white);
                 top: 0%;
                 width: 100%;
                 height: 7%;
@@ -132,14 +135,14 @@
             </div>
         </div>
         <div id = "intome_top_click" style="box-shadow: 10px 10px 20px #888888;z-index:10;margin-top:1%;margin-bottom:1%;margin-right:1%;margin-left:1%;position:fixed;top:0;left:0;bottom:0;width:15%;height:auto;border-right-style:groove;background-repeat:no-repeat;background-size: cover;">
-            <div style="margin-top:0%;background:radial-gradient(blue,purple);opacity:0.7;margin-bottom:0%;margin-right:0%;margin-left:0%;position:relative;left:0;top:0;width:100%;height:5%;border-bottom-style:groove">
-                <h1 align="center" style="width:100%;margin:auto;position:absolute;bottom:0;text-decoration:underline;font-family:'Brush Script MT',cursive;color:red">intoMe</h1>
+            <div style="padding:5px 0px; margin-top:0%;background:radial-gradient(white,black);opacity:0.7;margin-bottom:0%;margin-right:0%;margin-left:0%;position:relative;left:0;top:0;width:100%;height:5%;border-bottom-style:groove">
+                <h1 align="center" style="width:100%;margin:auto;position:absolute;bottom:0;font-family:'Brush Script MT',cursive;color:red">intoMe</h1>
             </div>
             <div id="top_click_div" style="margin-top:0%;margin-bottom:0%;margin-right:5%;margin-left:5%;position:relative;left:0;top:0;bottom:0;width:90%">
                 <script>
                     var list = ajax_call(api_top_click,"GET","",false);
                     list = JSON.parse(list);
-                    for ( i = 0; i < top_click_count; i++){
+                    for ( i = 0; i < 3; i++){
                         temp = document.createElement('video');
                         temp.className = "top_click";
                         temp.setAttribute("src",list[i])
