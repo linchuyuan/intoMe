@@ -1,3 +1,5 @@
+<?php header('access-control-allow-origin: *'); ?>
+<?php header('access-control-allow-headers: *'); ?>
 <?php
 $target_file = "/var/www/html/intoMe/all_video/" . basename($_FILES["fileToUpload"]["name"]);
 if (file_exists($target_file)) {
